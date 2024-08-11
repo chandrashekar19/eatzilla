@@ -1,7 +1,11 @@
+import Body from "./components/Body";
+import Header from "./components/Header";
+
 const AppLayout = () => {
   return (
     <div>
-      <h1>App Layout</h1>
+      <Header />
+      <Body />
     </div>
   );
 };
