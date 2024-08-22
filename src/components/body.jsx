@@ -76,9 +76,12 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {filteredRestaurant?.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
-        ))}
+        {filteredRestaurant?.map((restaurant) => {
+          console.log("restaurant", restaurant);
+          return (
+            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          );
+        })}
       </div>
     </div>
   );

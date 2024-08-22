@@ -1,14 +1,16 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Header from "./components/header";
 import About from "./components/about";
 import Body from "./components/body";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import Error from "./components/error";
+import Contact from "./components/contact";
 const AppLayout = () => {
   return (
-    <div>
+    <div className="app">
       <Header />
-      <Body />
+      <Outlet />
     </div>
   );
 };
@@ -17,10 +19,21 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <AppLayout />,
-  },
-  {
-    path: "/about",
-    element: <About />,
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+    ],
+    errorElement: <Error />,
   },
 ]);
 
