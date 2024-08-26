@@ -1,18 +1,50 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import Header from "./components/header";
-import About from "./components/about";
-import Body from "./components/body";
+/* eslint-disable react-refresh/only-export-components */
+import { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import Error from "./components/error";
+import Header from "./components/header";
+import Body from "./components/body";
+//import About from "./components/About";
 import Contact from "./components/contact";
+import Error from "./components/error";
 import RestaurantMenu from "./components/restaurantMenu";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import UserContext from "./utils/userContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/cart";
+
+// Chunking
+// Code Splitting
+// Dynamic Bundling
+// lazy Loading
+// on demand loading
+// dynamix imoprt
+
+const Grocery = lazy(() => import("./components/grocery"));
+
+const About = lazy(() => import("./components/about"));
+
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  //authentication
+  useEffect(() => {
+    // Make an API call and send username and password
+    const data = {
+      name: "Akshay Saini",
+    };
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -27,15 +59,31 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About />,
+        element: (
+          <Suspense fallback={<h1>Loading....</h1>}>
+            <About />
+          </Suspense>
+        ),
       },
       {
         path: "/contact",
         element: <Contact />,
       },
       {
-        path: "/restaurant/:resId",
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h1>Loading....</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/restaurants/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,
@@ -43,6 +91,5 @@ const appRouter = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={appRouter} />);
 
-export default AppLayout;
+root.render(<RouterProvider router={appRouter} />);
