@@ -2,7 +2,7 @@ import { LOGO_URL } from "../utils/constants";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import UserContext from "../utils/userContext";
+import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
 
 const Header = () => {
@@ -18,9 +18,9 @@ const Header = () => {
   //console.log(cartItems);
 
   return (
-    <div className="flex justify-between bg-pink-100 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
-      <div className="logo-container">
-        <img className="w-56" src={LOGO_URL} />
+    <div className="flex h-[100px] justify-between bg-pink-100 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
+      <div className=" h-[100px] logo-container">
+        <img className="w-[128px] h-[100px]" src={LOGO_URL} />
       </div>
       <div className="flex items-center">
         <ul className="flex p-4 m-4">

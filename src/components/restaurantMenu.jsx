@@ -16,25 +16,26 @@ const RestaurantMenu = () => {
 
   if (resInfo === null) return <Shimmer />;
 
-  const { name, cuisines, costForTwoMessage } =
-    resInfo?.cards[0]?.card?.card?.info;
+  // const {itemCards} = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+  const { name, cuisines, costForTwoMessage, avgRating } =
+    resInfo?.cards[2]?.card?.card?.info;
 
-  //   const { itemCards } =
-  //     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+  const category = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
 
-  const categories =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
-      (c) =>
-        c.card?.["card"]?.["@type"] ===
-        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
-    );
-  //console.log(categories);
+  const categories = category.filter(
+    (c) =>
+      c?.card?.card?.["@type"] ==
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
 
+  console.log(categories);
   return (
     <div className="text-center">
       <h1 className="font-bold my-6 text-2xl">{name}</h1>
       <p className="font-bold text-lg">
         {cuisines.join(", ")} - {costForTwoMessage}
+        <br />
+        {avgRating}
       </p>
       {/* categories accordions */}
       {categories.map((category, index) => (

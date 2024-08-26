@@ -1,14 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
 import { lazy, Suspense, useEffect, useState } from "react";
+import "./index.css";
 import ReactDOM from "react-dom/client";
 import Header from "./components/header";
 import Body from "./components/body";
-//import About from "./components/About";
 import Contact from "./components/contact";
 import Error from "./components/error";
 import RestaurantMenu from "./components/restaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import UserContext from "./utils/userContext";
+import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/cart";
