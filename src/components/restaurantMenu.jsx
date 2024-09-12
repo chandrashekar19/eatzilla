@@ -8,6 +8,8 @@ import { useState } from "react";
 const RestaurantMenu = () => {
   const { resId } = useParams();
 
+  // this is a example for the prop drilling .
+
   const dummy = "Dummy Data";
 
   const resInfo = useRestaurantMenu(resId);

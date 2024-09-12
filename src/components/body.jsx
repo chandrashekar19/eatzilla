@@ -10,9 +10,7 @@ const Body = () => {
   // Local State Variable - Super powerful variable
   const [listOfRestaurants, setListOfRestraunt] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-
   const [searchText, setSearchText] = useState("");
-
   const RestaurantCardPromoted = withPromtedLabel(RestaurantCard);
 
   // Whenever state variables update, react triggers a reconciliation cycle(re-renders the component)
@@ -30,10 +28,10 @@ const Body = () => {
 
     // Optional Chaining
     setListOfRestraunt(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRestaurant(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
@@ -101,18 +99,21 @@ const Body = () => {
         </div>
       </div>
       <div className="flex flex-wrap">
-        {filteredRestaurant.map((restaurant) => (
-          <Link
-            key={restaurant?.info.id}
-            to={"/restaurants/" + restaurant?.info.id}
-          >
-            {restaurant?.info.promoted ? (
-              <RestaurantCardPromoted resData={restaurant?.info} />
-            ) : (
-              <RestaurantCard resData={restaurant?.info} />
-            )}
-          </Link>
-        ))}
+        {filteredRestaurant.map((restaurant) => {
+          console.log("restaurant", restaurant?.info.promoted);
+          return (
+            <Link
+              key={restaurant?.info.id}
+              to={"/restaurants/" + restaurant?.info.id}
+            >
+              {restaurant?.info.promoted ? (
+                <RestaurantCardPromoted resData={restaurant?.info} />
+              ) : (
+                <RestaurantCard resData={restaurant?.info} />
+              )}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
