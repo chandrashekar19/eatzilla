@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import RestaurantCard, { withPromtedLabel } from "./restaurantCard";
+import RestaurantCard, { withPromtedLabel } from "./restaurant-card";
 import { useState, useEffect, useContext } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
-import UserContext from "../utils/UserContext";
+import useOnlineStatus from "../utils/use-online-status";
+import UserContext from "../utils/user-context";
 
 const Body = () => {
   // Local State Variable - Super powerful variable

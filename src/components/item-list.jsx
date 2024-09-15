@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
-import { addItem } from "../utils/cartSlice";
+import { addItem } from "../utils/cart-slice";
 import { CDN_URL } from "../utils/constants";
 
-const ItemList = ({ items, dummy }) => {
+const ItemList = ({ items }) => {
   const dispatch = useDispatch();
 
   const handleAddItem = (item) => {

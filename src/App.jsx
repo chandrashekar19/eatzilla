@@ -6,12 +6,12 @@ import Header from "./components/header";
 import Body from "./components/body";
 import Contact from "./components/contact";
 import Error from "./components/error";
-import RestaurantMenu from "./components/restaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
-import appStore from "./utils/appStore";
+import appStore from "./utils/app-store";
 import Cart from "./components/cart";
+import RestaurantMenu from "./components/restaurant-menu";
+import UserContext from "./utils/user-context";
 
 // Chunking
 // Code Splitting

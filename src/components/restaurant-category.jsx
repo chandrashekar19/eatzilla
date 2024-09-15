@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import ItemList from "./ItemList";
+import ItemList from "./item-list";
 
 const RestaurantCategory = ({ data, showItems, setShowIndex, dummy }) => {
   const handleClick = () => {
