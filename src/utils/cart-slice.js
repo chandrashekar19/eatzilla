@@ -8,14 +8,16 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       //mutating the state here
+      // redux toolkit uses the Immer behid the scenes to mutate the state
       state.items.push(action.payload);
     },
     removeItem: (state) => {
       state.items.pop();
     },
 
-    clearCart: (state) => {
-      state.items.length = 0; // originalState = []
+    clearCart: () => {
+      // state.items.length = 0; // originalState = []
+      // console.log(current(state));
       return { items: [] }; // this new object will be replaced inside originalState = { items: [] }
     },
   },
