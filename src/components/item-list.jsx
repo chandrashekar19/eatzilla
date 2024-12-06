@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
-import { addItem } from "../utils/cart-slice";
-import { CDN_URL } from "../utils/constants";
+import { addItem } from "../hooks/cart-slice";
+import { CDN_URL } from "../constants/end-points";
 
 const ItemList = ({ items }) => {
   const dispatch = useDispatch();

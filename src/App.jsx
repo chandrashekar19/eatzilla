@@ -8,10 +8,10 @@ import Contact from "./components/contact";
 import Error from "./components/error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
-import appStore from "./utils/app-store";
 import Cart from "./components/cart";
 import RestaurantMenu from "./components/restaurant-menu";
-import UserContext from "./utils/user-context";
+import UserContext from "./hooks/user-context";
+import appStore from "./hooks/app-store";
 
 // Chunking
 // Code Splitting

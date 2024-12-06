@@ -2,7 +2,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 
-import { CDN_URL } from "../utils/constants";
+import { CDN_URL } from "../constants/end-points";
 const RestaurantCard = (props) => {
   const { resData } = props;
   // const { loggedInUser } = useContext(UserContext);

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { RESTAURANT_API } from "../utils/constants";
+import { RESTAURANT_API } from "../constants/end-points";
 
 const useRestaurantApi = () => {
   useEffect(() => {

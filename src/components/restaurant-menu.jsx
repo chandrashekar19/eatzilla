@@ -1,7 +1,7 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import Shimmer from "./shimmer";
 import { useParams } from "react-router-dom";
-import useRestaurantMenu from "../utils/use-restaurant-menu";
+import useRestaurantMenu from "../hooks/use-restaurant-menu";
 import RestaurantCategory from "./restaurant-category";
 import { useState } from "react";
 

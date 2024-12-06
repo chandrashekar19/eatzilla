@@ -3,8 +3,8 @@ import RestaurantCard, { withPromtedLabel } from "./restaurant-card";
 import { useState, useEffect, useContext } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/use-online-status";
-import UserContext from "../utils/user-context";
+import useOnlineStatus from "../hooks/use-online-status";
+import UserContext from "../hooks/user-context";
 
 const Body = () => {
   // Local State Variable - Super powerful variable

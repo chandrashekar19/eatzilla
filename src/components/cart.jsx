@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { clearCart } from "../utils/cart-slice";
+import { clearCart } from "../hooks/cart-slice";
 import { useDispatch } from "react-redux";
 import ItemList from "./item-list";
 
