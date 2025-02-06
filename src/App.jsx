@@ -4,7 +4,7 @@ import "./index.css";
 import ReactDOM from "react-dom/client";
 import Header from "./components/header";
 import Body from "./components/body";
-import Contact from "./components/contact";
+import Contact from "./pages/contact";
 import Error from "./components/error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -20,9 +20,9 @@ import appStore from "./hooks/app-store";
 // on demand loading
 // dynamix imoprt
 
-const Grocery = lazy(() => import("./components/grocery"));
+const Grocery = lazy(() => import("./pages/grocery"));
 
-const About = lazy(() => import("./components/about"));
+const About = lazy(() => import("./pages/about"));
 
 const AppLayout = () => {
   const [userName, setUserName] = useState();
