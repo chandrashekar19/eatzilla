@@ -20,7 +20,7 @@ import appStore from "./hooks/app-store";
 // on demand loading
 // dynamix imoprt
 
-const Grocery = lazy(() => import("./pages/grocery"));
+// const Grocery = lazy(() => import("./pages/grocery"));
 
 const About = lazy(() => import("./pages/about"));
 
@@ -69,14 +69,14 @@ const appRouter = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
-      {
-        path: "/grocery",
-        element: (
-          <Suspense fallback={<h1>Loading....</h1>}>
-            <Grocery />
-          </Suspense>
-        ),
-      },
+      // {
+      //   path: "/grocery",
+      //   element: (
+      //     <Suspense fallback={<h1>Loading....</h1>}>
+      //       <Grocery />
+      //     </Suspense>
+      //   ),
+      // },
       {
         path: "/restaurants/:resId",
         element: <RestaurantMenu />,
