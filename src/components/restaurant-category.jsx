@@ -1,26 +1,35 @@
 /* eslint-disable react/prop-types */
+import { ChevronDown, ChevronUp } from "lucide-react";
 import ItemList from "./item-list";
 
-const RestaurantCategory = ({ data, showItems, setShowIndex, dummy }) => {
+const RestaurantCategory = ({ data, showItems, setShowIndex }) => {
   const handleClick = () => {
-    setShowIndex(!showItems);
+    setShowIndex((prevIndex) => (prevIndex === data.title ? null : data.title));
   };
-  return (
-    <div>
-      {/* Header */}
-      <div className="w-6/12 mx-auto my-4 bg-gray-50 shadow-lg p-4">
-        <div
-          className="flex justify-between cursor-pointer"
-          onClick={handleClick}
-        >
-          <span className="font-bold text-lg">
-            {data.title} ({data.itemCards.length})
-          </span>
-          <span>⬇️</span>
-        </div>
 
-        {showItems && <ItemList items={data.itemCards} dummy={dummy} />}
+  return (
+    <div className="max-w-4xl w-full mx-auto my-4 bg-white shadow-md rounded-lg overflow-hidden transition-all">
+      {/* Header */}
+      <div
+        className="flex justify-between items-center bg-gray-100 px-6 py-4 cursor-pointer hover:bg-gray-200 transition-all"
+        onClick={handleClick}
+      >
+        <span className="font-semibold text-lg text-gray-800">
+          {data.title} ({data.itemCards.length})
+        </span>
+        {showItems ? (
+          <ChevronUp className="text-gray-600" />
+        ) : (
+          <ChevronDown className="text-gray-600" />
+        )}
       </div>
+
+      {/* Items List (Accordion Content) */}
+      {showItems && (
+        <div className="p-6 border-t border-gray-300">
+          <ItemList items={data.itemCards} />
+        </div>
+      )}
     </div>
   );
 };

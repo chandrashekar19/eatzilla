@@ -1,16 +1,16 @@
-/* eslint-disable react/no-unescaped-entities */
-import RestaurantCard, { withPromtedLabel } from "./restaurant-card";
+import RestaurantCard, { withPromotedLabel } from "./restaurant-card";
 import { useState, useEffect, useContext } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/use-online-status";
 import UserContext from "../hooks/user-context";
+import { Search, RefreshCcw, WifiOff, User } from "lucide-react";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const RestaurantCardPromoted = withPromtedLabel(RestaurantCard);
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -42,52 +42,52 @@ const Body = () => {
 
   if (!onlineStatus)
     return (
-      <h1 className="text-center text-xl font-semibold text-red-600 mt-10">
-        ❌ You're offline! Please check your internet connection.
+      <h1 className="text-center text-xl font-semibold text-red-600 mt-10 flex items-center justify-center">
+        <WifiOff className="mr-2" /> You are offline! Please check your internet
+        connection.
       </h1>
     );
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="p-24">
+    <div className="p-4 sm:p-6 md:p-10 lg:p-16">
       {/* Search & Filter Section */}
-      <div className="flex flex-wrap justify-center items-center gap-4 p-6 bg-gradient-to-r from-orange-300 to-yellow-200 rounded-xl shadow-lg">
-        <div className="flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow-lg border">
+      <br />
+      <br />
+      <br />
+      <br />
+      <div className="flex flex-wrap justify-center items-center gap-4 p-4 bg-gradient-to-r from-orange-300 to-yellow-200 rounded-xl shadow-lg w-full max-w-4xl mx-auto">
+        <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-lg border w-full sm:w-auto">
+          <Search className="text-gray-500 mr-2" />
           <input
             type="text"
             data-testid="searchInput"
-            className="border-none focus:ring-0 outline-none px-2 w-64"
+            className="border-none focus:ring-0 outline-none px-2 w-full sm:w-64"
             placeholder="Search for restaurants..."
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
-              handleSearch(e.target.value); // Instant filtering
+              handleSearch(e.target.value);
             }}
             onKeyDown={(e) => e.key === "Enter" && handleSearch(searchText)}
           />
-          <button
-            className="bg-orange-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-orange-600 transition"
-            onClick={() => handleSearch(searchText)}
-          >
-            🔍 Search
-          </button>
         </div>
 
         <button
-          className="px-6 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition"
+          className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition flex items-center"
           onClick={() => {
-            setSearchText(""); // Clear search box
-            setFilteredRestaurants(listOfRestaurants); // Restore full list
+            setSearchText("");
+            setFilteredRestaurants(listOfRestaurants);
           }}
         >
-          🔄 Reset
+          <RefreshCcw className="mr-2" /> Reset
         </button>
 
-        <div className="flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow-lg border">
-          <label className="text-gray-600 font-medium">User Name:</label>
+        <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-lg border w-full sm:w-auto">
+          <User className="text-gray-500 mr-2" />
           <input
-            className="border-none focus:ring-0 outline-none px-2 w-32"
+            className="border-none focus:ring-0 outline-none px-2 w-full sm:w-32"
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
           />
@@ -101,7 +101,6 @@ const Body = () => {
             <Link
               key={restaurant?.info.id}
               to={`/restaurants/${restaurant?.info.id}`}
-              className="transform transition hover:scale-105 hover:shadow-lg"
             >
               {restaurant?.info.promoted ? (
                 <RestaurantCardPromoted resData={restaurant?.info} />
@@ -112,7 +111,8 @@ const Body = () => {
           ))
         ) : (
           <h2 className="text-center text-gray-600 text-lg col-span-full">
-            😞 No restaurants found for "<strong>{searchText}</strong>"
+            😞 No restaurants found for &quot;<strong>{searchText}</strong>
+            &quot;
           </h2>
         )}
       </div>

@@ -7,49 +7,49 @@ import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-
-  // this is a example for the prop drilling .
-
-  const dummy = "Dummy Data";
-
   const resInfo = useRestaurantMenu(resId);
-
   const [showIndex, setShowIndex] = useState(null);
 
-  if (resInfo === null) return <Shimmer />;
+  if (!resInfo) return <Shimmer />;
 
-  // const {itemCards} = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
   const { name, cuisines, costForTwoMessage, avgRating } =
-    resInfo?.cards[2]?.card?.card?.info;
+    resInfo?.cards[2]?.card?.card?.info || {};
 
-  const category = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+  const category =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
 
   const categories = category.filter(
     (c) =>
-      c?.card?.card?.["@type"] ==
+      c?.card?.card?.["@type"] ===
       "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
 
-  console.log(categories);
   return (
-    <div className="text-center">
-      <h1 className="font-bold my-6 text-2xl">{name}</h1>
-      <p className="font-bold text-lg">
-        {cuisines.join(", ")} - {costForTwoMessage}
-        <br />
-        {avgRating}
-      </p>
-      {/* categories accordions */}
-      {categories.map((category, index) => (
-        // controlled component
-        <RestaurantCategory
-          key={category?.card?.card.title}
-          data={category?.card?.card}
-          showItems={index === showIndex ? true : false}
-          setShowIndex={() => setShowIndex(index)}
-          dummy={dummy}
-        />
-      ))}
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+      {/* Restaurant Details */}
+      <div className="text-center  rounded-lg p-6 mb-6">
+        <h1 className="font-bold text-3xl text-gray-800">{name}</h1>
+        <p className="text-lg text-gray-600 mt-2">
+          {cuisines.join(", ")} - {costForTwoMessage}
+        </p>
+        <span className="text-green-600 font-semibold text-xl">
+          {avgRating} ⭐
+        </span>
+      </div>
+
+      {/* Category Accordion List */}
+      <div className="space-y-4">
+        {categories.map((category, index) => (
+          <RestaurantCategory
+            key={category?.card?.card?.title}
+            data={category?.card?.card}
+            showItems={showIndex === index}
+            setShowIndex={() =>
+              setShowIndex((prevIndex) => (prevIndex === index ? null : index))
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 };
