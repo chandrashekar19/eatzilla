@@ -4,7 +4,7 @@ import "./index.css";
 import ReactDOM from "react-dom/client";
 import Header from "./components/header";
 import Body from "./components/body";
-import Contact from "./pages/contact";
+import Contact from "./components/contact";
 import Error from "./components/error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -22,7 +22,7 @@ import appStore from "./hooks/app-store";
 
 // const Grocery = lazy(() => import("./pages/grocery"));
 
-const About = lazy(() => import("./pages/about"));
+const About = lazy(() => import("./components/about"));
 
 const AppLayout = () => {
   const [userName, setUserName] = useState();
@@ -41,6 +41,9 @@ const AppLayout = () => {
       <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
         <div className="app">
           <Header />
+          <br />
+          <br />
+          <br />
           <Outlet />
         </div>
       </UserContext.Provider>

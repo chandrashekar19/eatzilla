@@ -1,10 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from "./restaurant-card";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/use-online-status";
-import UserContext from "../hooks/user-context";
-import { Search, RefreshCcw, WifiOff, User } from "lucide-react";
+import { Search, RefreshCcw, WifiOff } from "lucide-react";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -38,7 +37,6 @@ const Body = () => {
   };
 
   const onlineStatus = useOnlineStatus();
-  const { loggedInUser, setUserName } = useContext(UserContext);
 
   if (!onlineStatus)
     return (
@@ -52,19 +50,16 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="p-4 sm:p-6 md:p-10 lg:p-16">
-      {/* Search & Filter Section */}
-      <br />
-      <br />
-      <br />
-      <br />
-      <div className="flex flex-wrap justify-center items-center gap-4 p-4 bg-gradient-to-r from-orange-300 to-yellow-200 rounded-xl shadow-lg w-full max-w-4xl mx-auto">
-        <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-lg border w-full sm:w-auto">
-          <Search className="text-gray-500 mr-2" />
+      {/* Search & Reset Section (Now Mobile-Friendly) */}
+      <div className="flex flex-col sm:flex-row items-center sm:items-start sm:justify-start gap-2 sm:gap-4 mb-6 w-full">
+        {/* Search Input (Smaller for Mobile) */}
+        <div className="flex items-center bg-white px-3 py-2  rounded-full shadow-md border w-10/12 sm:w-72">
+          <Search className="text-gray-500 mr-2" size={18} />
           <input
             type="text"
             data-testid="searchInput"
-            className="border-none focus:ring-0 outline-none px-2 w-full sm:w-64"
-            placeholder="Search for restaurants..."
+            className="border-none focus:ring-0 outline-none px-1 w-full text-gray-800 text-sm sm:text-base"
+            placeholder="Search restaurants..."
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -74,38 +69,37 @@ const Body = () => {
           />
         </div>
 
+        {/* Reset Button (Smaller on Mobile) */}
         <button
-          className="px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition flex items-center"
+          className="px-3 py-2 bg-green-600 text-white font-medium rounded-full shadow-md hover:bg-green-700 transition flex items-center text-sm sm:text-base w-auto"
           onClick={() => {
             setSearchText("");
             setFilteredRestaurants(listOfRestaurants);
           }}
         >
-          <RefreshCcw className="mr-2" /> Reset
+          <RefreshCcw className="mr-2" size={16} /> Reset
         </button>
-
-        <div className="flex items-center bg-white px-4 py-2 rounded-lg shadow-lg border w-full sm:w-auto">
-          <User className="text-gray-500 mr-2" />
-          <input
-            className="border-none focus:ring-0 outline-none px-2 w-full sm:w-32"
-            value={loggedInUser}
-            onChange={(e) => setUserName(e.target.value)}
-          />
-        </div>
       </div>
 
       {/* Restaurants Grid */}
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center">
         {filteredRestaurants.length > 0 ? (
           filteredRestaurants.map((restaurant) => (
             <Link
               key={restaurant?.info.id}
               to={`/restaurants/${restaurant?.info.id}`}
+              className="flex justify-center"
             >
               {restaurant?.info.promoted ? (
-                <RestaurantCardPromoted resData={restaurant?.info} />
+                <RestaurantCardPromoted
+                  resData={restaurant?.info}
+                  className="w-full max-w-[320px] h-auto"
+                />
               ) : (
-                <RestaurantCard resData={restaurant?.info} />
+                <RestaurantCard
+                  resData={restaurant?.info}
+                  className="w-full max-w-[320px] h-auto"
+                />
               )}
             </Link>
           ))

@@ -1,27 +1,30 @@
-import { LOGO_URL } from "../constants/end-points";
-import { useState, useContext } from "react";
+import foodLogo from "../assets/food-2.jpg";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/use-online-status";
-import UserContext from "../hooks/user-context";
+// import UserContext from "../hooks/user-context";
 import { useSelector } from "react-redux";
 import { Menu, X } from "lucide-react";
 
 const Header = () => {
-  const [btnNameReact, setBtnNameReact] = useState("Login");
+  // const [btnNameReact, setBtnNameReact] = useState("Login");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const onlineStatus = useOnlineStatus();
-  const { loggedInUser } = useContext(UserContext);
+  // const { loggedInUser } = useContext(UserContext);
 
   // Subscribing to Redux store
   const cartItems = useSelector((store) => store.cart.items);
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white/30 backdrop-blur-md shadow-lg z-50">
+    <header
+      className="fixed top-0 left-0 w-full bg-white/30 backdrop-blur-md bg-gradient-to-r from-orange-500 to-orange-700
+ shadow-lg z-50"
+    >
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3">
-          <img className="w-14 h-14 rounded-full" src={LOGO_URL} alt="Logo" />
+          <img className="w-14 h-14 rounded-full" src={foodLogo} alt="Logo" />
           <span className="text-2xl font-bold text-gray-900 dark:text-white">
             EatZilla
           </span>
@@ -49,21 +52,21 @@ const Header = () => {
           </Link>
 
           {/* Login Button */}
-          <button
+          {/* <button
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300"
             onClick={() =>
               setBtnNameReact(btnNameReact === "Login" ? "Logout" : "Login")
             }
           >
             {btnNameReact}
-          </button>
+          </button> */}
 
           {/* Logged-in User */}
-          {loggedInUser && (
+          {/* {loggedInUser && (
             <span className="text-lg font-medium text-gray-700 dark:text-gray-300">
               {loggedInUser}
             </span>
-          )}
+          )} */}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -115,18 +118,18 @@ const Header = () => {
               Cart ({cartItems.length})
             </Link>
 
-            <button
+            {/* <button
               className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300"
               onClick={() =>
                 setBtnNameReact(btnNameReact === "Login" ? "Logout" : "Login")
               }
             >
               {btnNameReact}
-            </button>
+            </button> */}
 
-            {loggedInUser && (
+            {/* {loggedInUser && (
               <span className="text-lg font-medium">{loggedInUser}</span>
-            )}
+            )} */}
           </nav>
         </div>
       )}
