@@ -16,7 +16,6 @@ A modern food delivery web application powered by **React**, **TailwindCSS**, **
 
 ## 🔑 Features
 
-- 🔐 **Authentication**: User Sign Up & Login
 - 🍕 **Real-Time Food Listings** using Swiggy API
 - 🛒 **Add to Cart Functionality**
 - 🔄 **Lazy Loading for Better Performance**
