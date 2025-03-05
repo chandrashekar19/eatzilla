@@ -3,7 +3,7 @@
 A modern food delivery web application powered by **React**, **TailwindCSS**, **Redux Toolkit**, and **Swiggy Real-Time API** with performance optimization using **Lazy Loading**.
 
 <div align="center">
-  <img src="./assets/eatzilla.png" alt="Food Delivery App Background" width="800" />
+  <img src="./public/eatzilla.png" alt="Food Delivery App Background" width="800" />
 </div>
 
 ## 🚀 Tech Stack
